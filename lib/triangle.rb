@@ -1,33 +1,31 @@
 class Triangle
-  attr_accessor :sides
-
-  def initialize(side_a, side_b, side_c)
-    @sides = [side_a, side_b, side_c]
-  end
-
-  def is_triangle?
-    if (@sides[0] + @sides[1] <= @sides[2] || @sides[1] + @sides[2] <= @sides[0] || @sides[0] + @sides[2] <= @sides[1])
-      false
-    elsif @sides.any? { |side| side == nil || side <= 0}
-      false
-    else
-      true
-    end
+  attr_accessor :side1, :side2, :side3
+  def initialize(side1, side2, side3)
+    @side1 = side1
+    @side2 = side2
+    @side3 = side3
   end
 
   def kind
-    if !is_triangle?
-      raise TriangleError
-    elsif sides.uniq.count == 1
+    if @side1 == 0 || @side2 == 0 || @side3 == 0 || @side1 + @side2 <= @side3 || @side1 + @side3 <= @side2 || @side2 + @side3 <= @side1
+      begin
+        raise TriangleError
+      rescue TriangleError => error
+        puts error.message
+        
+      end
+    elsif @side1 == @side2 && @side2 == @side3
       :equilateral
-    elsif sides.uniq.count == 2
+    elsif @side1 == @side2 || @side2 == @side3 || @side1 == @side3
       :isosceles
     else
-      :scalene
+       :scalene
     end
   end
-end
-
+  
+    
   class TriangleError < StandardError
-    # triangle error code
-  end
+    def message
+        "you must give the get_married method an argument of an instance of the person class!"
+    end
+end
