@@ -12,7 +12,7 @@ class Triangle
         raise TriangleError
       rescue TriangleError => error
         puts error.message
-        
+
       end
     elsif @side1 == @side2 && @side2 == @side3
       :equilateral
@@ -22,8 +22,8 @@ class Triangle
        :scalene
     end
   end
-  
-    
+
+
   class TriangleError < StandardError
     def message
         "you must give the get_married method an argument of an instance of the person class!"
